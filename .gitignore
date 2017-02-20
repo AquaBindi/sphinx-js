@@ -1,2 +1,4 @@
 /.tox
 /dist
+__pycache__
+sphinx_js.egg-info
