@@ -1,1 +1,3 @@
+:orphan:
+
 .. js:autofunction:: linkDensity

@@ -33,7 +33,7 @@ class AutoFunctionTests(TestCase):
         preserved."""
         self._file_contents_eq(
             'autofunction_explicit',
-            'linkDensity(snorko, borko[, forko])' + DESCRIPTION + FIELDS + CONTENT)
+            'linkDensity2(snorko, borko[, forko])' + DESCRIPTION + FIELDS + CONTENT)
 
     def test_autofunction_short(self):
         """Make sure the ``:short-name:`` option works."""

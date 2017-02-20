@@ -1,4 +1,6 @@
-.. js:autofunction:: linkDensity(snorko, borko[, forko])
+:orphan:
+
+.. js:autofunction:: linkDensity2(snorko, borko[, forko])
 
    Things are ``neat``.
 
