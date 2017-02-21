@@ -1,4 +1,6 @@
-from .directive import auto_class_directive_bound_to_app, auto_function_directive_bound_to_app
+from .directive import (auto_class_directive_bound_to_app,
+                        auto_function_directive_bound_to_app,
+                        auto_data_directive_bound_to_app)
 from .jsdoc import run_jsdoc
 
 
@@ -10,6 +12,9 @@ def setup(app):
 
     app.connect('env-before-read-docs', read_all_docs)
 
+    app.add_directive_to_domain('js',
+                                'autodata',
+                                auto_data_directive_bound_to_app(app))
     app.add_directive_to_domain('js',
                                 'autofunction',
                                 auto_function_directive_bound_to_app(app))

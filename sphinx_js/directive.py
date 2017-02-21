@@ -79,6 +79,31 @@ class JsDirective(Directive):
                 yield callback(field)
 
 
+def auto_data_directive_bound_to_app(app):
+    class AutoDataDirective(JsDirective):
+        _template = 'data.rst'
+
+        def run(self):
+            return self._run(app)
+
+        def _fields(self, doclet):
+            FIELD_TYPES = OrderedDict([('properties', _properties_formatter)])
+            for field_name, callback in iteritems(FIELD_TYPES):
+                for field in doclet.get(field_name, []):
+                    yield callback(field)
+                    if doclet.get('readonly'):
+                        yield ['readonly'], 'true'
+
+        def _template_vars(self, name, doclet):
+            return dict(
+                name=name,
+                fields=self._fields(doclet),
+                description=doclet.get('description', ''),
+                content='\n'.join(self.content))
+
+    return AutoDataDirective
+
+
 def auto_function_directive_bound_to_app(app):
     """Give the js:autofunction directive access to the Sphinx app singleton by
     closing over it.
@@ -139,6 +164,15 @@ def auto_class_directive_bound_to_app(app):
                 content='\n'.join(self.content))
 
     return AutoClassDirective
+
+
+def _properties_formatter(field):
+    """Derive heads and tail from ``@property`` blocks."""
+    types = _or_types(field)
+    tail = '**%s** ' % field['name']
+    tail += ('(%s) -- ' % types) if types else ''
+    tail += field.get('description', '')
+    return ['property'], tail
 
 
 def _returns_formatter(field):
