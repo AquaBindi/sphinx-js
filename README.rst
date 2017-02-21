@@ -98,6 +98,13 @@ We provide a basic ``js:autoclass`` directive which pulls in class comments and 
 
        Additional content can go here and appears below the in-code comments.
 
+autodata
+--------
+
+data is @property
+
+    .. js:autodata:: config.defaults.PLAYER
+
 Example
 =======
 
@@ -118,6 +125,10 @@ Run ``python setup.py test``. Run ``tox`` to test across Python versions.
 
 Version History
 ===============
+
+1.3
+  * Add basic ``autodata`` directive. only @property.
+  * recurse into subdirectories for JavaScript source files
 
 1.2
   * Always do full rebuilds; don't leave pages stale when JS code has changed but the RSTs have not.
